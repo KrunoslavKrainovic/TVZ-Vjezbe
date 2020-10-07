@@ -58,4 +58,14 @@ public class Ispit {
     public void setDatumIVrijeme(LocalDateTime datumIVrijeme) {
         this.datumIVrijeme = datumIVrijeme;
     }
+
+    @Override
+    public String toString() {
+        return "Ispit{" +
+                "predmet=" + predmet +
+                ", student=" + student +
+                ", ocjena=" + ocjena +
+                ", datumIVrijeme=" + datumIVrijeme +
+                '}';
+    }
 }

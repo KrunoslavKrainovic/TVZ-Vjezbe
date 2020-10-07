@@ -1,5 +1,7 @@
 package hr.java.vjezbe.entitet;
 
+import java.util.Arrays;
+
 public class Predmet {
 
     private String sifra;
@@ -63,5 +65,16 @@ public class Predmet {
 
     public void setStudent(Student[] student) {
         this.student = student;
+    }
+
+    @Override
+    public String toString() {
+        return "Predmet{" +
+                "sifra='" + sifra + '\'' +
+                ", naziv='" + naziv + '\'' +
+                ", brojEctsBodova=" + brojEctsBodova +
+                ", nositelj=" + nositelj +
+                ", student=" + Arrays.toString(student) +
+                '}';
     }
 }

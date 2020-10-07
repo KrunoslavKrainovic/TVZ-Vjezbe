@@ -1,11 +1,14 @@
 package hr.java.vjezbe.entitet;
-
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
 
 public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski {
+
+    final static Logger logger = LoggerFactory.getLogger(FakultetRacunarstva.class);
+
 
 
     public FakultetRacunarstva() {}
@@ -22,6 +25,11 @@ public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski 
 
     @Override
     public Student odrediStudentaZaRektorovuNagradu() {
+
+        logger.info("START: odrediStudentaZaRektorovuNagradu()");
+
+
+
 
         BigDecimal prosjekOcjenaPrethodnogStudenta = new BigDecimal(0);
 
@@ -80,14 +88,25 @@ public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski 
         }
 
 
+        Student student = studentiSNajvecimProsjekom.get(indexNajmladegStudenta);
 
-        return studentiSNajvecimProsjekom.get(indexNajmladegStudenta);
+        logger.info("END: odrediStudentaZaRektorovuNagradu()");
+        logger.debug("OUTPUT: {},", student.toString());
+
+        return student;
+
+
     }
 
 
 
 
     public Integer zbrojIzvrsnihOcjena(ArrayList<Ispit> ispiti){
+
+        logger.info("START: zbrojIzvrsnihOcjena()");
+        logger.debug("Input {}", ispiti.toString());
+
+
 
         Integer zbrojPetica = 0;
 
@@ -100,11 +119,22 @@ public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski 
 
         }
 
+
+        logger.info("END: zbrojIzvrsnihOcjena()");
+        logger.debug("OUTPUT: {},", zbrojPetica);
+
         return zbrojPetica;
+
     }
 
     @Override
     public Student odrediNajuspjesnijegStudentaNaGodini(Integer godina) {
+
+        logger.info("START: odrediNajuspjesnijegStudentaNaGodini()");
+        logger.debug("Input {}", godina);
+
+
+
         Integer prethodniZbrojPetica = 0;
 
         Integer zbrojSvihPeticaStudenta;
@@ -127,11 +157,25 @@ public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski 
         }
 
 
-        return studenti.get(studenti.size() - 1);
+
+
+        Student student = studenti.get(studenti.size() - 1);
+
+        logger.info("END: odrediNajuspjesnijegStudentaNaGodini()");
+        logger.debug("OUTPUT: {}", student.toString());
+
+        return student;
     }
 
     @Override
     public BigDecimal izracunajKonacnuOcjenuStudijaZaStudenta(ArrayList<Ispit> ispiti, Integer ocjenaDiplomskogRada, Integer ocjenaObraneDiplomskogRada) {
+
+        logger.info("START: izracunajKonacnuOcjenuStudijaZaStudenta()");
+        logger.debug("Input {},{},{}", ispiti.toString(),ocjenaDiplomskogRada,ocjenaObraneDiplomskogRada);
+
+
+
+
         BigDecimal ocjenaPismenogIZavrsnogDijela = new BigDecimal(ocjenaDiplomskogRada + ocjenaObraneDiplomskogRada);
 
         BigDecimal prosjecnaOcjenaIspita = new BigDecimal(0);
@@ -146,11 +190,25 @@ public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski 
 
         prosjecnaOcjenaIspita = prosjecnaOcjenaIspita.divide(pet);
 
-        return prosjecnaOcjenaIspita;
+
+
+
+        BigDecimal prosjecnaOcjenaIspita1 = prosjecnaOcjenaIspita;
+        logger.info("END: izracunajKonacnuOcjenuStudijaZaStudenta()");
+        logger.debug("OUTPUT: {}", prosjecnaOcjenaIspita1);
+
+        return prosjecnaOcjenaIspita1;
     }
 
     public ArrayList<Ispit> filtrirajIspitePoStudentu(ArrayList<Ispit> ispiti,Student student){
-        return Diplomski.super.filtrirajIspitePoStudentu(ispiti,student);
+        logger.info("START: filtrirajIspitePoStudentu()");
+        logger.debug("Input {},{}", ispiti.toString(),student.toString());
+
+        ArrayList<Ispit> ispits = Diplomski.super.filtrirajIspitePoStudentu(ispiti, student);
+
+        logger.info("END: filtrirajIspitePoStudentu()");
+        logger.debug("OUTPUT: {}", ispits.toString());
+        return ispits;
 
     }
 

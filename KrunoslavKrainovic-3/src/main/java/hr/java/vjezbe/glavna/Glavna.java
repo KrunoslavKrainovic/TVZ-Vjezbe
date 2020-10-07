@@ -16,7 +16,11 @@ public class Glavna {
 
     final static Logger logger = LoggerFactory.getLogger(Glavna.class);
 
+
     public static ArrayList<Profesor> unosProfesora(Scanner scanner, ArrayList<Profesor> profesori) {
+
+        logger.info("START: unosProfesora()");
+        logger.debug("Input {},{}", scanner,profesori.toString());
 
         scanner.nextLine();
         for (int i = 0; i < 2; i++) {
@@ -39,10 +43,19 @@ public class Glavna {
 
 
         }
-        return profesori;
+        ArrayList<Profesor> profesoris = profesori;
+
+        logger.info("END: unosProfesora()");
+        logger.debug("OUTPUT: {}", profesoris.toString());
+
+        return profesoris;
     }
 
     public static ArrayList<Predmet> unosPredmeta(Scanner scanner, ArrayList<Predmet> predmeti, ArrayList<Profesor> profesori) {
+
+        logger.info("START: unosPredmeta()");
+        logger.debug("Input {},{},{}", scanner,predmeti.toString(),profesori.toString());
+
         boolean tocanUnos;
         Integer brojEctsBodova = 0;
         Integer odabraniProfesor = 0;
@@ -113,10 +126,19 @@ public class Glavna {
 
         }
 
-        return predmeti;
+        ArrayList<Predmet> predmetis = predmeti;
+
+        logger.info("END: unosPredmeta()");
+        logger.debug("OUTPUT: {}", predmetis.toString());
+
+        return predmetis;
     }
 
     public static ArrayList<Student> unosStudenta(Scanner scanner, ArrayList<Student> studenti) {
+
+        logger.info("START: unosStudenta()");
+        logger.debug("Input {},{},{}", scanner,studenti.toString());
+
 
         for (int i = 0; i < 2; i++) {
 
@@ -140,11 +162,20 @@ public class Glavna {
             studenti.add(new Student(imeStudenta, prezimeStudenta, jmbagStudenta, dateTime));
 
         }
-        return studenti;
+        ArrayList<Student> studentis = studenti;
+        logger.info("END: unosStudenta()");
+        logger.debug("OUTPUT: {}", studentis.toString());
+        return studentis;
 
     }
 
     public static ArrayList<Ispit> unosIspita(Scanner scanner, ArrayList<Ispit> ispiti, ArrayList<Student> studenti, ArrayList<Predmet> predmeti) {
+
+        logger.info("START: unosIspita()");
+        logger.debug("Input {},{},{},{}", ispiti.toString(),scanner,studenti.toString(),predmeti.toString());
+
+
+
         boolean tocanUnos;
         Integer odabirPredemta = 0;
         Integer odabirStudenta = 0;
@@ -236,10 +267,17 @@ public class Glavna {
 
         }
 
-        return ispiti;
+        ArrayList<Ispit> ispitis = ispiti;
+        logger.info("END: unosIspita()");
+        logger.debug("OUTPUT: {}", ispitis.toString());
+
+        return ispitis;
     }
 
     public static void unosObrazovneUstanove(Scanner scanner, ArrayList<Ispit> ispiti, ArrayList<Student> studenti, ArrayList<Predmet> predmeti, ArrayList<Profesor> profesori) {
+
+        logger.info("START: unosIspita()");
+        logger.debug("INPUT: {},{},{},{},{}", scanner,ispiti.toString(),studenti.toString(),predmeti.toString(),profesori.toString());
 
         ObrazovnaUstanova ustanova = null;
 
@@ -347,6 +385,7 @@ public class Glavna {
 
         }
 
+        logger.info("END: unosObrazovneUstanove()");
 
     }
 

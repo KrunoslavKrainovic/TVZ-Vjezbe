@@ -1,10 +1,14 @@
 package hr.java.vjezbe.entitet;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class VeleucilisteJave extends ObrazovnaUstanova implements Visokoskolska {
 
+    final static Logger logger = LoggerFactory.getLogger(VeleucilisteJave.class);
 
     public VeleucilisteJave() {
 
@@ -21,6 +25,12 @@ public class VeleucilisteJave extends ObrazovnaUstanova implements Visokoskolska
 
     @Override
     public Student odrediNajuspjesnijegStudentaNaGodini(Integer godina) {
+
+        logger.info("START: odrediNajuspjesnijegStudentaNaGodini()");
+        logger.debug("Input {}", godina);
+
+
+
         double najvecaOcjena = 0;
 
         Integer indexStudentaSNajvecimProsjekom = null;
@@ -42,13 +52,23 @@ public class VeleucilisteJave extends ObrazovnaUstanova implements Visokoskolska
 
 
 
-        return super.getStudenti().get(indexStudentaSNajvecimProsjekom);
+
+        Student student = super.getStudenti().get(indexStudentaSNajvecimProsjekom);
+        logger.info("END: odrediNajuspjesnijegStudentaNaGodini()");
+        logger.debug("OUTPUT: {}", student);
+
+        return student;
     }
 
 
 
     @Override
     public BigDecimal izracunajKonacnuOcjenuStudijaZaStudenta(ArrayList<Ispit> ispiti, Integer ocjenaPismenogDijela, Integer ocjenaZavrsnogRada) {
+
+        logger.info("START: izracunajKonacnuOcjenuStudijaZaStudenta()");
+        logger.debug("Input {},{},{}", ispiti,ocjenaPismenogDijela,ocjenaZavrsnogRada);
+
+
 
         BigDecimal ocjenaPismenogIZavrsnogDijela = new BigDecimal(ocjenaPismenogDijela + ocjenaZavrsnogRada);
 
@@ -64,12 +84,25 @@ public class VeleucilisteJave extends ObrazovnaUstanova implements Visokoskolska
 
         prosjecnaOcjenaIspita = prosjecnaOcjenaIspita.divide(cetri);
 
-        return prosjecnaOcjenaIspita;
+        BigDecimal prosjecnaOcjenaIspita1 = prosjecnaOcjenaIspita;
+
+        logger.info("END: izracunajKonacnuOcjenuStudijaZaStudenta()");
+        logger.debug("OUTPUT: {}", prosjecnaOcjenaIspita1);
+
+        return prosjecnaOcjenaIspita1;
 
     }
 
     public ArrayList<Ispit> filtrirajIspitePoStudentu(ArrayList<Ispit> ispiti,Student student){
-        return Visokoskolska.super.filtrirajIspitePoStudentu(ispiti,student);
+        logger.info("START: filtrirajIspitePoStudentu()");
+        logger.debug("Input {},{}", ispiti,student);
+
+        ArrayList<Ispit> ispits = Visokoskolska.super.filtrirajIspitePoStudentu(ispiti, student);
+
+        logger.info("END: filtrirajIspitePoStudentu()");
+        logger.debug("OUTPUT: {}", ispits);
+
+        return ispits;
 
     }
 

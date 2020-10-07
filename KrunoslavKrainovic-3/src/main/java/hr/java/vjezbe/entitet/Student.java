@@ -30,4 +30,12 @@ public class Student  extends Osoba  {
     public void setDatumRodjena(LocalDate datumRodjena) {
         this.datumRodjena = datumRodjena;
     }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "jmbag='" + jmbag + '\'' +
+                ", datumRodjena=" + datumRodjena +
+                '}';
+    }
 }
