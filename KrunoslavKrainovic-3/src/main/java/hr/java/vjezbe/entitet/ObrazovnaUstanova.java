@@ -1,5 +1,7 @@
 package hr.java.vjezbe.entitet;
 
+import hr.java.vjezbe.iznimke.NemoguceOdreditiProsjekStudentaException;
+
 import java.util.ArrayList;
 
 public abstract class ObrazovnaUstanova {
@@ -20,7 +22,7 @@ public abstract class ObrazovnaUstanova {
 
 
 
-    public abstract Student odrediNajuspjesnijegStudentaNaGodini(Integer godina);
+    public abstract Student odrediNajuspjesnijegStudentaNaGodini(Integer godina) throws NemoguceOdreditiProsjekStudentaException;
 
     public ObrazovnaUstanova() {}
 

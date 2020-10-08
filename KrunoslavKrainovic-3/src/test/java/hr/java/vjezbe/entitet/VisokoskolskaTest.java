@@ -1,5 +1,6 @@
 package hr.java.vjezbe.entitet;
 
+import hr.java.vjezbe.iznimke.NemoguceOdreditiProsjekStudentaException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -59,7 +60,7 @@ public class VisokoskolskaTest {
     }
 
     @Test
-    public void test(){
+    public void test() throws NemoguceOdreditiProsjekStudentaException {
         System.out.println(fax.izracunajKonacnuOcjenuStudijaZaStudenta(ispiti,5,5));
     }
 

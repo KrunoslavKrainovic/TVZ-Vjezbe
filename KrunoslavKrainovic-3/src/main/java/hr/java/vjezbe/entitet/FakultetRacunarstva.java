@@ -1,4 +1,5 @@
 package hr.java.vjezbe.entitet;
+import hr.java.vjezbe.iznimke.NemoguceOdreditiProsjekStudentaException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.math.BigDecimal;
@@ -24,7 +25,7 @@ public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski 
 
 
     @Override
-    public Student odrediStudentaZaRektorovuNagradu() {
+    public Student odrediStudentaZaRektorovuNagradu() throws NemoguceOdreditiProsjekStudentaException {
 
         logger.info("START: odrediStudentaZaRektorovuNagradu()");
 
@@ -168,7 +169,7 @@ public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski 
     }
 
     @Override
-    public BigDecimal izracunajKonacnuOcjenuStudijaZaStudenta(ArrayList<Ispit> ispiti, Integer ocjenaDiplomskogRada, Integer ocjenaObraneDiplomskogRada) {
+    public BigDecimal izracunajKonacnuOcjenuStudijaZaStudenta(ArrayList<Ispit> ispiti, Integer ocjenaDiplomskogRada, Integer ocjenaObraneDiplomskogRada) throws NemoguceOdreditiProsjekStudentaException {
 
         logger.info("START: izracunajKonacnuOcjenuStudijaZaStudenta()");
         logger.debug("Input {},{},{}", ispiti.toString(),ocjenaDiplomskogRada,ocjenaObraneDiplomskogRada);

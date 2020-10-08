@@ -1,5 +1,6 @@
 package hr.java.vjezbe.entitet;
 
+import hr.java.vjezbe.iznimke.NemoguceOdreditiProsjekStudentaException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,7 +25,7 @@ public class VeleucilisteJave extends ObrazovnaUstanova implements Visokoskolska
 
 
     @Override
-    public Student odrediNajuspjesnijegStudentaNaGodini(Integer godina) {
+    public Student odrediNajuspjesnijegStudentaNaGodini(Integer godina) throws NemoguceOdreditiProsjekStudentaException {
 
         logger.info("START: odrediNajuspjesnijegStudentaNaGodini()");
         logger.debug("Input {}", godina);
@@ -63,7 +64,7 @@ public class VeleucilisteJave extends ObrazovnaUstanova implements Visokoskolska
 
 
     @Override
-    public BigDecimal izracunajKonacnuOcjenuStudijaZaStudenta(ArrayList<Ispit> ispiti, Integer ocjenaPismenogDijela, Integer ocjenaZavrsnogRada) {
+    public BigDecimal izracunajKonacnuOcjenuStudijaZaStudenta(ArrayList<Ispit> ispiti, Integer ocjenaPismenogDijela, Integer ocjenaZavrsnogRada) throws NemoguceOdreditiProsjekStudentaException {
 
         logger.info("START: izracunajKonacnuOcjenuStudijaZaStudenta()");
         logger.debug("Input {},{},{}", ispiti,ocjenaPismenogDijela,ocjenaZavrsnogRada);
