@@ -174,7 +174,7 @@ public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski 
         logger.info("START: izracunajKonacnuOcjenuStudijaZaStudenta()");
         logger.debug("Input {},{},{}", ispiti.toString(),ocjenaDiplomskogRada,ocjenaObraneDiplomskogRada);
 
-
+        BigDecimal nedovoljan = new BigDecimal(1);
 
 
         BigDecimal ocjenaPismenogIZavrsnogDijela = new BigDecimal(ocjenaDiplomskogRada + ocjenaObraneDiplomskogRada);
@@ -183,7 +183,13 @@ public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski 
 
         BigDecimal tri = new BigDecimal(3);
 
-        prosjecnaOcjenaIspita = prosjecnaOcjenaIspita.add(tri.multiply(odrediProsjekOcjenaNaIspitima(ispiti)));
+        try {
+            prosjecnaOcjenaIspita = prosjecnaOcjenaIspita.add(tri.multiply(odrediProsjekOcjenaNaIspitima(ispiti)));
+        }catch (NemoguceOdreditiProsjekStudentaException e){
+            logger.info("Iznimka" ,e);
+            System.out.println("Student " + ispiti.get(0).getStudent().getIme() + " " +  ispiti.get(0).getStudent().getPrezime() + " zbog negativne ocjene na jednom od ispita ima prosjek nedovoljan (1)!");
+            return nedovoljan;
+        }
 
         prosjecnaOcjenaIspita = prosjecnaOcjenaIspita.add(ocjenaPismenogIZavrsnogDijela);
 

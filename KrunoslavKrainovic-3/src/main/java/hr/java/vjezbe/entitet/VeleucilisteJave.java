@@ -35,16 +35,21 @@ public class VeleucilisteJave extends ObrazovnaUstanova implements Visokoskolska
         double najvecaOcjena = 0;
 
         Integer indexStudentaSNajvecimProsjekom = null;
-
+        double prosjekOcjena = 1;
         for (int i = 0; i < super.getStudenti().size(); i++) {
 
             ArrayList<Ispit> ispits = filtrirajIspitePoStudentu(super.getIspiti(),super.getStudenti().get(i));
 
-            double prosjekOcjena = odrediProsjekOcjenaNaIspitima(ispits).doubleValue();
+            try{
+                 prosjekOcjena = odrediProsjekOcjenaNaIspitima(ispits).doubleValue();
+            }catch (NemoguceOdreditiProsjekStudentaException e){
+                logger.info("Student " + super.getStudenti().get(i).getIme() + " " + super.getStudenti().get(i).getPrezime() +" zbog negativne ocjene na jednom od ispita ima prosjek nedovoljan (1)!" ,e);
+            }
+
 
             if ( prosjekOcjena >= najvecaOcjena){
 
-                    najvecaOcjena = odrediProsjekOcjenaNaIspitima(filtrirajIspitePoStudentu(super.getIspiti(),super.getStudenti().get(i))).doubleValue();
+                    najvecaOcjena = prosjekOcjena;
 
                     indexStudentaSNajvecimProsjekom = i;
 
@@ -70,14 +75,21 @@ public class VeleucilisteJave extends ObrazovnaUstanova implements Visokoskolska
         logger.debug("Input {},{},{}", ispiti,ocjenaPismenogDijela,ocjenaZavrsnogRada);
 
 
+        BigDecimal nedovoljan = new BigDecimal(1);
 
         BigDecimal ocjenaPismenogIZavrsnogDijela = new BigDecimal(ocjenaPismenogDijela + ocjenaZavrsnogRada);
 
         BigDecimal prosjecnaOcjenaIspita = new BigDecimal(0);
 
         BigDecimal dva = new BigDecimal(2);
+        try {
+            prosjecnaOcjenaIspita = prosjecnaOcjenaIspita.add(dva.multiply(odrediProsjekOcjenaNaIspitima(ispiti)));
+        }catch (NemoguceOdreditiProsjekStudentaException e){
+            logger.info("Iznimka" ,e);
+            System.out.println("Student " + ispiti.get(0).getStudent().getIme() + " " +  ispiti.get(0).getStudent().getPrezime() + " zbog negativne ocjene na jednom od ispita ima prosjek nedovoljan (1)!");
+            return nedovoljan;
+        }
 
-        prosjecnaOcjenaIspita = prosjecnaOcjenaIspita.add(dva.multiply(odrediProsjekOcjenaNaIspitima(ispiti)));
 
         prosjecnaOcjenaIspita = prosjecnaOcjenaIspita.add(ocjenaPismenogIZavrsnogDijela);
 
