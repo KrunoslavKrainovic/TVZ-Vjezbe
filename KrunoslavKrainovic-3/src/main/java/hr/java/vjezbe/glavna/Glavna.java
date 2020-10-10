@@ -250,19 +250,21 @@ public class Glavna {
             ispiti.add(new Ispit(predmeti.get(odabirPredemta - 1), studenti.get(odabirStudenta - 1), ocjenaIspita, date));
 
 
-            if (ocjenaIspita.equals(1)) {
-                ocjenaUText = "nedovoljan";
-            } else if (ocjenaIspita.equals(2)) {
-                ocjenaUText = "dovoljan";
-            } else if (ocjenaIspita.equals(3)) {
-                ocjenaUText = "dobar";
-            } else if (ocjenaIspita.equals(4)) {
-                ocjenaUText = "vrlo dobar";
-            } else if (ocjenaIspita.equals(5)) {
-                ocjenaUText = "izvrstan";
-            }
+
 
             for (int j = 0; j < ispiti.size(); j++) {
+
+                if (ispiti.get(j).getOcjena().equals(1)) {
+                    ocjenaUText = "nedovoljan";
+                } else if (ispiti.get(j).getOcjena().equals(2)) {
+                    ocjenaUText = "dovoljan";
+                } else if (ispiti.get(j).getOcjena().equals(3)) {
+                    ocjenaUText = "dobar";
+                } else if (ispiti.get(j).getOcjena().equals(4)) {
+                    ocjenaUText = "vrlo dobar";
+                } else if (ispiti.get(j).getOcjena().equals(5)) {
+                    ocjenaUText = "izvrstan";
+                }
                 System.out.println("Student " + ispiti.get(j).getStudent().getIme() + " " + ispiti.get(j).getStudent().getPrezime() + "  je ostvario ocjenu '" + ocjenaUText + "' na predmetu '" + ispiti.get(j).getPredmet().getNaziv() + "'");
             }
 
