@@ -3,6 +3,7 @@ package hr.java.vjezbe.glavna;
 
 import hr.java.vjezbe.entitet.*;
 import hr.java.vjezbe.iznimke.NemoguceOdreditiProsjekStudentaException;
+import hr.java.vjezbe.iznimke.PostojiViseNajmladjihStudenataException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -275,7 +276,8 @@ public class Glavna {
         return ispitis;
     }
 
-    public static void unosObrazovneUstanove(Scanner scanner, ArrayList<Ispit> ispiti, ArrayList<Student> studenti, ArrayList<Predmet> predmeti, ArrayList<Profesor> profesori) throws NemoguceOdreditiProsjekStudentaException {
+    public static void unosObrazovneUstanove(Scanner scanner, ArrayList<Ispit> ispiti, ArrayList<Student> studenti, ArrayList<Predmet> predmeti, ArrayList<Profesor> profesori)
+        throws NemoguceOdreditiProsjekStudentaException, PostojiViseNajmladjihStudenataException {
 
         logger.info("START: unosIspita()");
         logger.debug("INPUT: {},{},{},{},{}", scanner,ispiti.toString(),studenti.toString(),predmeti.toString(),profesori.toString());
@@ -390,7 +392,8 @@ public class Glavna {
 
     }
 
-    public static void main(String[] args) throws NemoguceOdreditiProsjekStudentaException {
+    public static void main(String[] args)
+        throws NemoguceOdreditiProsjekStudentaException, PostojiViseNajmladjihStudenataException {
 
         Scanner scanner = new Scanner(System.in);
 

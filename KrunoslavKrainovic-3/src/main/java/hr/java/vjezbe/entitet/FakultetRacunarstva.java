@@ -1,5 +1,6 @@
 package hr.java.vjezbe.entitet;
 import hr.java.vjezbe.iznimke.NemoguceOdreditiProsjekStudentaException;
+import hr.java.vjezbe.iznimke.PostojiViseNajmladjihStudenataException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.math.BigDecimal;
@@ -25,7 +26,8 @@ public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski 
 
 
     @Override
-    public Student odrediStudentaZaRektorovuNagradu() throws NemoguceOdreditiProsjekStudentaException {
+    public Student odrediStudentaZaRektorovuNagradu()
+        throws NemoguceOdreditiProsjekStudentaException, PostojiViseNajmladjihStudenataException {
 
         logger.info("START: odrediStudentaZaRektorovuNagradu()");
 
@@ -84,7 +86,17 @@ public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski 
 
             }
 
+        }
 
+
+        for (int i = 0; i < studentiSNajvecimProsjekom.size(); i++) {
+
+            if (studentiSNajvecimProsjekom.get(i).getDatumRodjena().isEqual(studentiSNajvecimProsjekom.get(indexNajmladegStudenta).getDatumRodjena()) && !studentiSNajvecimProsjekom.get(indexNajmladegStudenta).equals(studentiSNajvecimProsjekom.get(i))){
+                System.out.println("Program završava s izvođenjem.");
+                logger.info("Ima vise najmladih studenata",new PostojiViseNajmladjihStudenataException());
+                throw new PostojiViseNajmladjihStudenataException("najmladi");
+
+            }
 
         }
 
