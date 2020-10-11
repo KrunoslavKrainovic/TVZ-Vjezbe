@@ -88,16 +88,31 @@ public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski 
 
         }
 
+        ArrayList<Student> najmladiStudenti = new ArrayList();
+        najmladiStudenti.add(studentiSNajvecimProsjekom.get(indexNajmladegStudenta));
 
         for (int i = 0; i < studentiSNajvecimProsjekom.size(); i++) {
 
             if (studentiSNajvecimProsjekom.get(i).getDatumRodjena().isEqual(studentiSNajvecimProsjekom.get(indexNajmladegStudenta).getDatumRodjena()) && !studentiSNajvecimProsjekom.get(indexNajmladegStudenta).equals(studentiSNajvecimProsjekom.get(i))){
-                System.out.println("Program završava s izvođenjem.");
-                logger.info("Ima vise najmladih studenata",new PostojiViseNajmladjihStudenataException());
-                throw new PostojiViseNajmladjihStudenataException("najmladi");
+                najmladiStudenti.add(studentiSNajvecimProsjekom.get(i));
 
             }
 
+        }
+        if (najmladiStudenti.size() > 1){
+            String defaultMessage = "Pronađeno je više najmlađih studenata s istim datumom rođenja, a to su ";
+            for (int i = 0; i < najmladiStudenti.size(); i++) {
+                if(i == (najmladiStudenti.size() - 1)){
+
+                    defaultMessage += najmladiStudenti.get(i).getIme() + " " + najmladiStudenti.get(i).getPrezime();
+                }
+                else
+                defaultMessage += najmladiStudenti.get(i).getIme() + " " + najmladiStudenti.get(i).getPrezime() + " i ";
+            }
+            System.out.println("Program završava s izvođenjem.");
+            System.out.println(defaultMessage);
+            logger.info(defaultMessage,new PostojiViseNajmladjihStudenataException());
+            throw new PostojiViseNajmladjihStudenataException(defaultMessage);
         }
 
 

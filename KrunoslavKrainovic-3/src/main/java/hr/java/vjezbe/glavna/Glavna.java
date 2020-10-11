@@ -324,46 +324,50 @@ public class Glavna {
         nazivUstanove = scanner.nextLine();
 
 
-        for (int i = 0; i < studenti.size(); i++) {
+        for (int i = 0; i < ispiti.size(); i++) {
 
-            do {
-                System.out.println("Unesite ocjenu završnog rada za studenta: " + studenti.get(i).getIme() + " " + studenti.get(i).getPrezime() + ":");
-                try {
-                    ocjenaZavrsnogRada = scanner.nextInt();
-                    tocanUnos = true;
-                } catch (Exception e) {
-                    scanner.nextLine();
-                    logger.info("Upisano je slovo umjesto broja " + e.getMessage());
-                    System.out.println("Ponovite unos");
-                    tocanUnos = false;
-                }
-            } while (tocanUnos == false);
-
-            scanner.nextLine();
-
-            do {
-                System.out.println("Unesite ocjenu obrane završnog rada za studenta: " + studenti.get(i).getIme() + " " + studenti.get(i).getPrezime() + ":");
-                try {
-                    ocjenaObranaZavrsnogRada = scanner.nextInt();
-                    tocanUnos = true;
-                } catch (Exception e) {
-                    scanner.nextLine();
-                    logger.info("Upisano je slovo umjesto broja " + e.getMessage());
-                    System.out.println("Ponovite unos");
-                    tocanUnos = false;
-                }
-            } while (tocanUnos == false);
+            if (ispiti.get(i).getOcjena() > 1) {
+                do {
+                    System.out.println("Unesite ocjenu završnog rada za studenta: " + ispiti.get(i).getStudent().getIme() + " " + ispiti.get(i).getStudent().getPrezime() + ":");
+                    try {
+                        ocjenaZavrsnogRada = scanner.nextInt();
+                        scanner.nextLine();
+                        tocanUnos = true;
+                    } catch (Exception e) {
+                        scanner.nextLine();
+                        logger.info("Upisano je slovo umjesto broja " + e.getMessage());
+                        System.out.println("Ponovite unos");
+                        tocanUnos = false;
+                    }
+                } while (tocanUnos == false);
 
 
-            scanner.nextLine();
+
+                do {
+                    System.out.println("Unesite ocjenu obrane završnog rada za studenta: " + ispiti.get(i).getStudent().getIme() + " " + ispiti.get(i).getStudent().getPrezime() + ":");
+                    try {
+                        ocjenaObranaZavrsnogRada = scanner.nextInt();
+                        scanner.nextLine();
+                        tocanUnos = true;
+                    } catch (Exception e) {
+                        scanner.nextLine();
+                        logger.info("Upisano je slovo umjesto broja " + e.getMessage());
+                        System.out.println("Ponovite unos");
+                        tocanUnos = false;
+                    }
+                } while (tocanUnos == false);
+            } else {
+                System.out.println("Student "+ ispiti.get(i).getStudent().getIme() + " " + ispiti.get(i).getStudent().getPrezime() + " zbog negativne ocjene na jednom od ispita ima prosjek„nedovoljan (1)“!");
+            }
+
 
             if (ustanova instanceof VeleucilisteJave) {
 
-                System.out.println("Konačna ocjena studija studenta " + studenti.get(i).getIme() + " " + studenti.get(i).getPrezime() + " " + ((VeleucilisteJave) ustanova).izracunajKonacnuOcjenuStudijaZaStudenta(((VeleucilisteJave) ustanova).filtrirajIspitePoStudentu(ispiti, studenti.get(i)), ocjenaZavrsnogRada, ocjenaObranaZavrsnogRada));
+                System.out.println("Konačna ocjena studija studenta " + ispiti.get(i).getStudent().getIme() + " " + ispiti.get(i).getStudent().getPrezime() + " " + ((VeleucilisteJave) ustanova).izracunajKonacnuOcjenuStudijaZaStudenta(((VeleucilisteJave) ustanova).filtrirajIspitePoStudentu(ispiti, ispiti.get(i).getStudent()), ocjenaZavrsnogRada, ocjenaObranaZavrsnogRada));
             }
             if (ustanova instanceof FakultetRacunarstva) {
 
-                System.out.println("Konačna ocjena studija studenta " + studenti.get(i).getIme() + " " + studenti.get(i).getPrezime() + " " + ((FakultetRacunarstva) ustanova).izracunajKonacnuOcjenuStudijaZaStudenta(((FakultetRacunarstva) ustanova).filtrirajIspitePoStudentu(ispiti, studenti.get(i)), ocjenaZavrsnogRada, ocjenaObranaZavrsnogRada));
+                System.out.println("Konačna ocjena studija studenta " + ispiti.get(i).getStudent().getIme() + " " + ispiti.get(i).getStudent().getPrezime() + " " + ((FakultetRacunarstva) ustanova).izracunajKonacnuOcjenuStudijaZaStudenta(((FakultetRacunarstva) ustanova).filtrirajIspitePoStudentu(ispiti, ispiti.get(i).getStudent()), ocjenaZavrsnogRada, ocjenaObranaZavrsnogRada));
             }
 
         }
@@ -380,11 +384,11 @@ public class Glavna {
         if (odabirUstanove.equals(2)) {
             ustanova = new FakultetRacunarstva(predmeti, profesori, studenti, ispiti);
 
-            Student rektorovaNagrada = ((FakultetRacunarstva) ustanova).odrediStudentaZaRektorovuNagradu();
-
             Student najuspijesniStudent = ((FakultetRacunarstva) ustanova).odrediNajuspjesnijegStudentaNaGodini(2018);
 
             System.out.println("Najbolji student 2018. godine je " + najuspijesniStudent.getIme() + " " + najuspijesniStudent.getPrezime() + " JMBAG: " + najuspijesniStudent.getJmbag());
+
+            Student rektorovaNagrada = ((FakultetRacunarstva) ustanova).odrediStudentaZaRektorovuNagradu();
 
             System.out.println("Student koji je osvojio rektorovu nagradu je: " + rektorovaNagrada.getIme() + " " + rektorovaNagrada.getPrezime() + " JMBAG: " + rektorovaNagrada.getJmbag());
 

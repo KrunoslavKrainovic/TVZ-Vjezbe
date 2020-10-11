@@ -4,9 +4,12 @@
     <list default="true" id="53f28fe6-70b6-46c8-8679-28088dedfca8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pogreske.txt" beforeDir="false" afterPath="$PROJECT_DIR$/pogreske.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/entitet/FakultetRacunarstva.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/entitet/FakultetRacunarstva.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/glavna/Glavna.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/glavna/Glavna.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/hr/java/vjezbe/entitet/VisokoskolskaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hr/java/vjezbe/entitet/VisokoskolskaTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/hr/java/vjezbe/entitet/FakultetRacunarstva.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hr/java/vjezbe/entitet/FakultetRacunarstva.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/hr/java/vjezbe/glavna/Glavna.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hr/java/vjezbe/glavna/Glavna.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/hr/java/vjezbe/entitet/VisokoskolskaTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/hr/java/vjezbe/entitet/VisokoskolskaTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +56,18 @@
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager" selected="Application.Glavna">
     <configuration name="Glavna" type="Application" factoryName="Application" nameIsGenerated="true">
@@ -154,12 +169,13 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="&quot;init commit&quot;" />

@@ -1,6 +1,7 @@
 package hr.java.vjezbe.entitet;
 
 import hr.java.vjezbe.iznimke.NemoguceOdreditiProsjekStudentaException;
+import hr.java.vjezbe.iznimke.PostojiViseNajmladjihStudenataException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -28,9 +29,9 @@ public class VisokoskolskaTest {
 
 
     private Student student = new Student("Kruno1","Kra","321321321",localDate1);
-    private Student student1 = new Student("Kruno2","Kra1","3211111321321",localDate2);
-    private Student student2 = new Student("Kruno3","Kra12","333123677821",localDate3);
-    private Student student3 = new Student("Kruno4","Kra123","466788",localDate4);
+    private Student student1 = new Student("Kruno2","Kra1","3211111321321",localDate1);
+    private Student student2 = new Student("Kruno3","Kra12","333123677821",localDate1);
+    private Student student3 = new Student("Kruno4","Kra123","466788",localDate1);
 
     private Profesor profesor = new Profesor("Prof","Prof","srot","srot");
 
@@ -41,17 +42,11 @@ public class VisokoskolskaTest {
     public void setUp(){
         ispiti = new ArrayList();
         ispiti.add(new Ispit(5,student,predmet));
-
-
-
-
-
+        ispiti.add(new Ispit(5,student1,predmet));
 
         studenti = new ArrayList();
         studenti.add(student);
         studenti.add(student1);
-        studenti.add(student2);
-        studenti.add(student3);
 
 
         fax = new FakultetRacunarstva(studenti,ispiti);
@@ -60,8 +55,8 @@ public class VisokoskolskaTest {
     }
 
     @Test
-    public void test() throws NemoguceOdreditiProsjekStudentaException {
-        System.out.println(fax.izracunajKonacnuOcjenuStudijaZaStudenta(ispiti,5,5));
+    public void test() throws NemoguceOdreditiProsjekStudentaException, PostojiViseNajmladjihStudenataException {
+        System.out.println(fax.odrediStudentaZaRektorovuNagradu());
     }
 
 
