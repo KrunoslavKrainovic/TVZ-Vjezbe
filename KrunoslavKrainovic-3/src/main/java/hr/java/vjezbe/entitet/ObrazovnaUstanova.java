@@ -1,18 +1,21 @@
 package hr.java.vjezbe.entitet;
 
+
+
 import hr.java.vjezbe.iznimke.NemoguceOdreditiProsjekStudentaException;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class ObrazovnaUstanova {
 
    private String naziv;
-   private ArrayList<Predmet> predmeti;
-    private ArrayList<Profesor> profesori;
-    private ArrayList<Student> studenti;
-    private ArrayList<Ispit> ispiti;
+   private List<Predmet> predmeti;
+    private List<Profesor> profesori;
+    private List<Student> studenti;
+    private List<Ispit> ispiti;
 
-    public ObrazovnaUstanova(ArrayList<Ispit> ispiti,ArrayList<Student> studenti) {
+    public ObrazovnaUstanova(List<Ispit> ispiti,List<Student> studenti) {
 
         this.ispiti = ispiti;
         this.studenti = studenti;
@@ -26,7 +29,7 @@ public abstract class ObrazovnaUstanova {
 
     public ObrazovnaUstanova() {}
 
-    public ObrazovnaUstanova(ArrayList<Predmet> predmeti, ArrayList<Profesor> profesori, ArrayList<Student> studenti, ArrayList<Ispit> ispiti) {
+    public ObrazovnaUstanova(List<Predmet> predmeti, List<Profesor> profesori, List<Student> studenti, List<Ispit> ispiti) {
 
         this.predmeti = predmeti;
         this.profesori = profesori;
@@ -42,35 +45,35 @@ public abstract class ObrazovnaUstanova {
         this.naziv = naziv;
     }
 
-    public ArrayList<Predmet> getPredmeti() {
+    public List<Predmet> getPredmeti() {
         return predmeti;
     }
 
-    public void setPredmeti(ArrayList<Predmet> predmeti) {
+    public void setPredmeti(List<Predmet> predmeti) {
         this.predmeti = predmeti;
     }
 
-    public ArrayList<Profesor> getProfesori() {
+    public List<Profesor> getProfesori() {
         return profesori;
     }
 
-    public void setProfesori(ArrayList<Profesor> profesori) {
+    public void setProfesori(List<Profesor> profesori) {
         this.profesori = profesori;
     }
 
-    public ArrayList<Student> getStudenti() {
+    public List<Student> getStudenti() {
         return studenti;
     }
 
-    public void setStudenti(ArrayList<Student> studenti) {
+    public void setStudenti(List<Student> studenti) {
         this.studenti = studenti;
     }
 
-    public ArrayList<Ispit> getIspiti() {
+    public List<Ispit> getIspiti() {
         return ispiti;
     }
 
-    public void setIspiti(ArrayList<Ispit> ispiti) {
+    public void setIspiti(List<Ispit> ispiti) {
         this.ispiti = ispiti;
     }
 

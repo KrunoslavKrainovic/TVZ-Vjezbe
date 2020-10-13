@@ -1,16 +1,19 @@
 package hr.java.vjezbe.entitet;
 
+
+
 import hr.java.vjezbe.iznimke.NemoguceOdreditiProsjekStudentaException;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 
 public interface Visokoskolska {
 
 
-    BigDecimal izracunajKonacnuOcjenuStudijaZaStudenta(ArrayList<Ispit> ispiti, Integer ocjenaPismenogDijela, Integer ocjenaZavrsnogRada) throws NemoguceOdreditiProsjekStudentaException;
+    BigDecimal izracunajKonacnuOcjenuStudijaZaStudenta(List<Ispit> ispiti, Integer ocjenaPismenogDijela, Integer ocjenaZavrsnogRada) throws NemoguceOdreditiProsjekStudentaException;
 
-    default BigDecimal odrediProsjekOcjenaNaIspitima(ArrayList<Ispit> ispiti) throws NemoguceOdreditiProsjekStudentaException {
+    default BigDecimal odrediProsjekOcjenaNaIspitima(List<Ispit> ispiti) throws NemoguceOdreditiProsjekStudentaException {
         BigDecimal prosjecnaOcjena = new BigDecimal(0);
 
         BigDecimal nedovoljan = new BigDecimal(1);
@@ -39,8 +42,8 @@ public interface Visokoskolska {
 
     }
 
-    private ArrayList<Ispit> filtrirajPolozeneIspite(ArrayList<Ispit> ispiti) {
-        ArrayList<Ispit> pozitivniIspiti = new ArrayList();
+    private List<Ispit> filtrirajPolozeneIspite(List<Ispit> ispiti) {
+        List<Ispit> pozitivniIspiti = new ArrayList();
 
         for (int i = 0; i < ispiti.size(); i++) {
             if (ispiti.get(i).getOcjena() > 1) {
@@ -52,7 +55,7 @@ public interface Visokoskolska {
         return pozitivniIspiti;
     }
 
-    private String filtrirajNedovoljneIspite(ArrayList<Ispit> ispiti) {
+    private String filtrirajNedovoljneIspite(List<Ispit> ispiti) {
 
 
         for (int i = 0; i < ispiti.size(); i++) {
@@ -65,9 +68,9 @@ public interface Visokoskolska {
         return "false";
     }
 
-     default ArrayList<Ispit> filtrirajIspitePoStudentu(ArrayList<Ispit> ispiti,Student student){
+     default List<Ispit> filtrirajIspitePoStudentu(List<Ispit> ispiti,Student student){
 
-            ArrayList<Ispit> ispitiStudenta = new ArrayList();
+         List<Ispit> ispitiStudenta = new ArrayList();
 
          for (int i = 0; i < ispiti.size(); i++) {
 

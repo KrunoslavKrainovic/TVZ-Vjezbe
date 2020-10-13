@@ -1,10 +1,12 @@
 package hr.java.vjezbe.entitet;
+
 import hr.java.vjezbe.iznimke.NemoguceOdreditiProsjekStudentaException;
 import hr.java.vjezbe.iznimke.PostojiViseNajmladjihStudenataException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski {
@@ -15,12 +17,12 @@ public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski 
 
     public FakultetRacunarstva() {}
 
-    public FakultetRacunarstva( ArrayList<Predmet> predmeti, ArrayList<Profesor> profesori, ArrayList<Student> studenti, ArrayList<Ispit> ispiti) {
+    public FakultetRacunarstva( List<Predmet> predmeti, List<Profesor> profesori, List<Student> studenti, List<Ispit> ispiti) {
         super( predmeti, profesori, studenti, ispiti);
     }
 
 
-    public FakultetRacunarstva(ArrayList<Student> studenti, ArrayList<Ispit> ispiti) {
+    public FakultetRacunarstva(List<Student> studenti, List<Ispit> ispiti) {
         super(ispiti, studenti);
     }
 
@@ -38,11 +40,11 @@ public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski 
 
         BigDecimal prosjekOcjenaStudenta;
 
-        ArrayList<Ispit> ispitiStudenta;
+        List<Ispit> ispitiStudenta;
 
         Integer indexStudenta = null;
 
-        ArrayList<Student> studentiSNajvecimProsjekom = new ArrayList();
+        List<Student> studentiSNajvecimProsjekom = new ArrayList();
 
         for (int i = 0; i < super.getStudenti().size(); i++) {
 
@@ -88,7 +90,7 @@ public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski 
 
         }
 
-        ArrayList<Student> najmladiStudenti = new ArrayList();
+        List<Student> najmladiStudenti = new ArrayList();
         najmladiStudenti.add(studentiSNajvecimProsjekom.get(indexNajmladegStudenta));
 
         for (int i = 0; i < studentiSNajvecimProsjekom.size(); i++) {
@@ -129,7 +131,7 @@ public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski 
 
 
 
-    public Integer zbrojIzvrsnihOcjena(ArrayList<Ispit> ispiti){
+    public Integer zbrojIzvrsnihOcjena(List<Ispit> ispiti){
 
         logger.info("START: zbrojIzvrsnihOcjena()");
         logger.debug("Input {}", ispiti.toString());
@@ -171,7 +173,7 @@ public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski 
 
         for (int i = 0; i < super.getStudenti().size(); i++) {
 
-            ArrayList<Ispit> ispits = filtrirajIspitePoStudentu(super.getIspiti(),super.getStudenti().get(i));
+            List<Ispit> ispits = filtrirajIspitePoStudentu(super.getIspiti(),super.getStudenti().get(i));
 
             zbrojSvihPeticaStudenta = zbrojIzvrsnihOcjena(ispits);
 
@@ -196,7 +198,7 @@ public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski 
     }
 
     @Override
-    public BigDecimal izracunajKonacnuOcjenuStudijaZaStudenta(ArrayList<Ispit> ispiti, Integer ocjenaDiplomskogRada, Integer ocjenaObraneDiplomskogRada) throws NemoguceOdreditiProsjekStudentaException {
+    public BigDecimal izracunajKonacnuOcjenuStudijaZaStudenta(List<Ispit> ispiti, Integer ocjenaDiplomskogRada, Integer ocjenaObraneDiplomskogRada) throws NemoguceOdreditiProsjekStudentaException {
 
         logger.info("START: izracunajKonacnuOcjenuStudijaZaStudenta()");
         logger.debug("Input {},{},{}", ispiti.toString(),ocjenaDiplomskogRada,ocjenaObraneDiplomskogRada);
@@ -234,11 +236,11 @@ public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski 
         return prosjecnaOcjenaIspita1;
     }
 
-    public ArrayList<Ispit> filtrirajIspitePoStudentu(ArrayList<Ispit> ispiti,Student student){
+    public List<Ispit> filtrirajIspitePoStudentu(List<Ispit> ispiti,Student student){
         logger.info("START: filtrirajIspitePoStudentu()");
         logger.debug("Input {},{}", ispiti.toString(),student.toString());
 
-        ArrayList<Ispit> ispits = Diplomski.super.filtrirajIspitePoStudentu(ispiti, student);
+        List<Ispit> ispits = Diplomski.super.filtrirajIspitePoStudentu(ispiti, student);
 
         logger.info("END: filtrirajIspitePoStudentu()");
         logger.debug("OUTPUT: {}", ispits.toString());

@@ -1,6 +1,8 @@
 package hr.java.vjezbe.entitet;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Predmet {
 
@@ -8,24 +10,21 @@ public class Predmet {
     private String naziv;
     private Integer brojEctsBodova;
     private Profesor nositelj;
-    private Student[] student;
+    private Set<Student> studenti;
+
+
 
     public Predmet() {}
 
-    public Predmet(String sifra, String naziv, Integer brojEctsBodova, Profesor nositelj, Student[] student) {
+    public Predmet(String sifra, String naziv, Integer brojEctsBodova, Profesor nositelj,Set<Student> studenti) {
         this.sifra = sifra;
         this.naziv = naziv;
         this.brojEctsBodova = brojEctsBodova;
         this.nositelj = nositelj;
-        this.student = student;
+        this.studenti = studenti;
+
     }
 
-    public Predmet(String sifra, String naziv, Integer brojEctsBodova, Profesor nositelj) {
-        this.sifra = sifra;
-        this.naziv = naziv;
-        this.brojEctsBodova = brojEctsBodova;
-        this.nositelj = nositelj;
-    }
 
     public String getSifra() {
         return sifra;
@@ -59,13 +58,14 @@ public class Predmet {
         this.nositelj = nositelj;
     }
 
-    public Student[] getStudent() {
-        return student;
+    public Set<Student> getStudenti() {
+        return studenti;
     }
 
-    public void setStudent(Student[] student) {
-        this.student = student;
+    public void setStudenti(Set<Student> studenti) {
+        this.studenti = studenti;
     }
+
 
     @Override
     public String toString() {
@@ -74,7 +74,7 @@ public class Predmet {
                 ", naziv='" + naziv + '\'' +
                 ", brojEctsBodova=" + brojEctsBodova +
                 ", nositelj=" + nositelj +
-                ", student=" + Arrays.toString(student) +
+                ", studenti=" + studenti +
                 '}';
     }
 }

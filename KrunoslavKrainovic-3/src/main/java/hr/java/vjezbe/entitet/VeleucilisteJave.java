@@ -1,11 +1,13 @@
 package hr.java.vjezbe.entitet;
 
+
 import hr.java.vjezbe.iznimke.NemoguceOdreditiProsjekStudentaException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 
 public class VeleucilisteJave extends ObrazovnaUstanova implements Visokoskolska {
 
@@ -15,11 +17,11 @@ public class VeleucilisteJave extends ObrazovnaUstanova implements Visokoskolska
 
     }
 
-    public VeleucilisteJave(ArrayList<Predmet> predmeti,ArrayList<Profesor> profesori,ArrayList<Student> studenti,ArrayList<Ispit> ispiti) {
+    public VeleucilisteJave(List<Predmet> predmeti,List<Profesor> profesori,List<Student> studenti,List<Ispit> ispiti) {
         super(predmeti,profesori,studenti,ispiti);
     }
 
-    public VeleucilisteJave(ArrayList<Ispit> ispiti,ArrayList<Student> student) {
+    public VeleucilisteJave(List<Ispit> ispiti,List<Student> student) {
         super(ispiti,student);
     }
 
@@ -38,7 +40,7 @@ public class VeleucilisteJave extends ObrazovnaUstanova implements Visokoskolska
         double prosjekOcjena = 1;
         for (int i = 0; i < super.getStudenti().size(); i++) {
 
-            ArrayList<Ispit> ispits = filtrirajIspitePoStudentu(super.getIspiti(),super.getStudenti().get(i));
+            List<Ispit> ispits = filtrirajIspitePoStudentu(super.getIspiti(),super.getStudenti().get(i));
 
             try{
                  prosjekOcjena = odrediProsjekOcjenaNaIspitima(ispits).doubleValue();
@@ -69,7 +71,7 @@ public class VeleucilisteJave extends ObrazovnaUstanova implements Visokoskolska
 
 
     @Override
-    public BigDecimal izracunajKonacnuOcjenuStudijaZaStudenta(ArrayList<Ispit> ispiti, Integer ocjenaPismenogDijela, Integer ocjenaZavrsnogRada) throws NemoguceOdreditiProsjekStudentaException {
+    public BigDecimal izracunajKonacnuOcjenuStudijaZaStudenta(List<Ispit> ispiti, Integer ocjenaPismenogDijela, Integer ocjenaZavrsnogRada) throws NemoguceOdreditiProsjekStudentaException {
 
         logger.info("START: izracunajKonacnuOcjenuStudijaZaStudenta()");
         logger.debug("Input {},{},{}", ispiti,ocjenaPismenogDijela,ocjenaZavrsnogRada);
@@ -106,11 +108,11 @@ public class VeleucilisteJave extends ObrazovnaUstanova implements Visokoskolska
 
     }
 
-    public ArrayList<Ispit> filtrirajIspitePoStudentu(ArrayList<Ispit> ispiti,Student student){
+    public List<Ispit> filtrirajIspitePoStudentu(List<Ispit> ispiti,Student student){
         logger.info("START: filtrirajIspitePoStudentu()");
         logger.debug("Input {},{}", ispiti,student);
 
-        ArrayList<Ispit> ispits = Visokoskolska.super.filtrirajIspitePoStudentu(ispiti, student);
+        List<Ispit> ispits = Visokoskolska.super.filtrirajIspitePoStudentu(ispiti, student);
 
         logger.info("END: filtrirajIspitePoStudentu()");
         logger.debug("OUTPUT: {}", ispits);

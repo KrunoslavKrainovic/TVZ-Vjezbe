@@ -10,16 +10,14 @@ import org.slf4j.LoggerFactory;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Locale;
-import java.util.Scanner;
+import java.util.*;
 
 public class Glavna {
 
     final static Logger logger = LoggerFactory.getLogger(Glavna.class);
 
 
-    public static ArrayList<Profesor> unosProfesora(Scanner scanner, ArrayList<Profesor> profesori) {
+    public static List<Profesor> unosProfesora(Scanner scanner, List<Profesor> profesori) {
 
         logger.info("START: unosProfesora()");
         logger.debug("Input {},{}", scanner,profesori.toString());
@@ -45,7 +43,7 @@ public class Glavna {
 
 
         }
-        ArrayList<Profesor> profesoris = profesori;
+        List<Profesor> profesoris = profesori;
 
         logger.info("END: unosProfesora()");
         logger.debug("OUTPUT: {}", profesoris.toString());
@@ -53,7 +51,7 @@ public class Glavna {
         return profesoris;
     }
 
-    public static ArrayList<Predmet> unosPredmeta(Scanner scanner, ArrayList<Predmet> predmeti, ArrayList<Profesor> profesori) {
+    public static List<Predmet> unosPredmeta(Scanner scanner, List<Predmet> predmeti, List<Profesor> profesori) {
 
         logger.info("START: unosPredmeta()");
         logger.debug("Input {},{},{}", scanner,predmeti.toString(),profesori.toString());
@@ -123,12 +121,12 @@ public class Glavna {
 
             scanner.nextLine();
 
-            Student[] students = new Student[brojStudenata];
-            predmeti.add(new Predmet(sifraPredmeta, nazivPredmeta, brojEctsBodova, profesori.get(odabraniProfesor - 1), students));
+            Set<Student> students = new HashSet<>();
+            predmeti.add(new Predmet(sifraPredmeta, nazivPredmeta, brojEctsBodova, profesori.get(odabraniProfesor - 1),students));
 
         }
 
-        ArrayList<Predmet> predmetis = predmeti;
+        List<Predmet> predmetis = predmeti;
 
         logger.info("END: unosPredmeta()");
         logger.debug("OUTPUT: {}", predmetis.toString());
@@ -136,7 +134,7 @@ public class Glavna {
         return predmetis;
     }
 
-    public static ArrayList<Student> unosStudenta(Scanner scanner, ArrayList<Student> studenti) {
+    public static List<Student> unosStudenta(Scanner scanner, List<Student> studenti) {
 
         logger.info("START: unosStudenta()");
         logger.debug("Input {},{},{}", scanner,studenti.toString());
@@ -164,14 +162,14 @@ public class Glavna {
             studenti.add(new Student(imeStudenta, prezimeStudenta, jmbagStudenta, dateTime));
 
         }
-        ArrayList<Student> studentis = studenti;
+        List<Student> studentis = studenti;
         logger.info("END: unosStudenta()");
         logger.debug("OUTPUT: {}", studentis.toString());
         return studentis;
 
     }
 
-    public static ArrayList<Ispit> unosIspita(Scanner scanner, ArrayList<Ispit> ispiti, ArrayList<Student> studenti, ArrayList<Predmet> predmeti) {
+    public static List<Ispit> unosIspita(Scanner scanner, List<Ispit> ispiti, List<Student> studenti, List<Predmet> predmeti) {
 
         logger.info("START: unosIspita()");
         logger.debug("Input {},{},{},{}", ispiti.toString(),scanner,studenti.toString(),predmeti.toString());
@@ -250,35 +248,35 @@ public class Glavna {
             ispiti.add(new Ispit(predmeti.get(odabirPredemta - 1), studenti.get(odabirStudenta - 1), ocjenaIspita, date));
 
 
-
+            Ocjena ocjena = null;
 
             for (int j = 0; j < ispiti.size(); j++) {
 
                 if (ispiti.get(j).getOcjena().equals(1)) {
-                    ocjenaUText = "nedovoljan";
+                   ocjena = Ocjena.nedovoljan;
                 } else if (ispiti.get(j).getOcjena().equals(2)) {
-                    ocjenaUText = "dovoljan";
+                    ocjena = Ocjena.dovoljan;
                 } else if (ispiti.get(j).getOcjena().equals(3)) {
-                    ocjenaUText = "dobar";
+                    ocjena = Ocjena.dobar;
                 } else if (ispiti.get(j).getOcjena().equals(4)) {
-                    ocjenaUText = "vrlo dobar";
+                    ocjena = Ocjena.vrlo_dobar;
                 } else if (ispiti.get(j).getOcjena().equals(5)) {
-                    ocjenaUText = "izvrstan";
+                    ocjena = Ocjena.izvrstan;
                 }
-                System.out.println("Student " + ispiti.get(j).getStudent().getIme() + " " + ispiti.get(j).getStudent().getPrezime() + "  je ostvario ocjenu '" + ocjenaUText + "' na predmetu '" + ispiti.get(j).getPredmet().getNaziv() + "'");
+                System.out.println("Student " + ispiti.get(j).getStudent().getIme() + " " + ispiti.get(j).getStudent().getPrezime() + "  je ostvario ocjenu '" + ocjena + "' na predmetu '" + ispiti.get(j).getPredmet().getNaziv() + "'");
             }
 
 
         }
 
-        ArrayList<Ispit> ispitis = ispiti;
+        List<Ispit> ispitis = ispiti;
         logger.info("END: unosIspita()");
         logger.debug("OUTPUT: {}", ispitis.toString());
 
         return ispitis;
     }
 
-    public static void unosObrazovneUstanove(Scanner scanner, ArrayList<Ispit> ispiti, ArrayList<Student> studenti, ArrayList<Predmet> predmeti, ArrayList<Profesor> profesori)
+    public static void unosObrazovneUstanove(Scanner scanner, List<Ispit> ispiti, List<Student> studenti, List<Predmet> predmeti, List<Profesor> profesori)
         throws NemoguceOdreditiProsjekStudentaException, PostojiViseNajmladjihStudenataException {
 
         logger.info("START: unosIspita()");
@@ -357,7 +355,7 @@ public class Glavna {
                     }
                 } while (tocanUnos == false);
             } else {
-                System.out.println("Student "+ ispiti.get(i).getStudent().getIme() + " " + ispiti.get(i).getStudent().getPrezime() + " zbog negativne ocjene na jednom od ispita ima prosjek„nedovoljan (1)“!");
+                System.out.println("Student "+ ispiti.get(i).getStudent().getIme() + " " + ispiti.get(i).getStudent().getPrezime() + " zbog negativne ocjene na jednom od ispita ima prosjek „nedovoljan (1)“!");
             }
 
 
@@ -411,19 +409,19 @@ public class Glavna {
 
             System.out.println("Unesite podatke za " + (i + 1) + ". obrazovnu ustanovu: ");
 
-            ArrayList<Profesor> profesori = new ArrayList();
+            List<Profesor> profesori = new ArrayList();
 
             profesori = unosProfesora(scanner, profesori);
 
-            ArrayList<Predmet> predmeti = new ArrayList();
+            List<Predmet> predmeti = new ArrayList();
 
             predmeti = unosPredmeta(scanner, predmeti, profesori);
 
-            ArrayList<Student> studenti = new ArrayList();
+            List<Student> studenti = new ArrayList();
 
             studenti = unosStudenta(scanner, studenti);
 
-            ArrayList<Ispit> ispiti = new ArrayList();
+            List<Ispit> ispiti = new ArrayList();
 
             ispiti = unosIspita(scanner, ispiti, studenti, predmeti);
 

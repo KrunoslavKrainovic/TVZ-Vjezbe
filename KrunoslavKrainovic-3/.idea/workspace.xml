@@ -2,15 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="53f28fe6-70b6-46c8-8679-28088dedfca8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/entitet/Ocjena.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pogreske.txt" beforeDir="false" afterPath="$PROJECT_DIR$/pogreske.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/entitet/FakultetRacunarstva.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/entitet/FakultetRacunarstva.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/entitet/ObrazovnaUstanova.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/entitet/ObrazovnaUstanova.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/entitet/Predmet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/entitet/Predmet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/entitet/VeleucilisteJave.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/entitet/VeleucilisteJave.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/entitet/Visokoskolska.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/entitet/Visokoskolska.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/glavna/Glavna.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/glavna/Glavna.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/hr/java/vjezbe/entitet/VisokoskolskaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hr/java/vjezbe/entitet/VisokoskolskaTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/hr/java/vjezbe/entitet/FakultetRacunarstva.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hr/java/vjezbe/entitet/FakultetRacunarstva.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hr/java/vjezbe/entitet/ObrazovnaUstanova.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hr/java/vjezbe/entitet/ObrazovnaUstanova.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hr/java/vjezbe/entitet/Predmet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hr/java/vjezbe/entitet/Predmet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hr/java/vjezbe/entitet/VeleucilisteJave.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hr/java/vjezbe/entitet/VeleucilisteJave.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hr/java/vjezbe/entitet/Visokoskolska.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hr/java/vjezbe/entitet/Visokoskolska.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/hr/java/vjezbe/glavna/Glavna.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hr/java/vjezbe/glavna/Glavna.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/hr/java/vjezbe/entitet/VisokoskolskaTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/hr/java/vjezbe/entitet/VisokoskolskaTest.class" afterDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -22,6 +30,7 @@
         <option value="JUnit4 Test Class" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
