@@ -1,6 +1,7 @@
 package hr.java.vjezbe.entitet;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Student  extends Osoba  {
 
@@ -37,5 +38,19 @@ public class Student  extends Osoba  {
                 "jmbag='" + jmbag + '\'' +
                 ", datumRodjena=" + datumRodjena +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return Objects.equals(jmbag, student.jmbag) &&
+                Objects.equals(datumRodjena, student.datumRodjena);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(jmbag, datumRodjena);
     }
 }

@@ -104,21 +104,6 @@ public class Glavna {
             } while (tocanUnos == false);
 
 
-
-
-            do {
-                System.out.println("Unesite broj studenata za predmetu '" + nazivPredmeta + "': ");
-                try {
-                    brojStudenata = scanner.nextInt();
-                    tocanUnos = true;
-                } catch (Exception e) {
-                    scanner.nextLine();
-                    logger.info("Upisano je slovo umjesto broja " + e.getMessage());
-                    System.out.println("Ponovite unos");
-                    tocanUnos = false;
-                }
-            } while (tocanUnos == false);
-
             scanner.nextLine();
 
             Set<Student> students = new HashSet<>();
@@ -137,7 +122,7 @@ public class Glavna {
     public static List<Student> unosStudenta(Scanner scanner, List<Student> studenti) {
 
         logger.info("START: unosStudenta()");
-        logger.debug("Input {},{},{}", scanner,studenti.toString());
+        logger.debug("Input {},{}", scanner,studenti.toString());
 
 
         for (int i = 0; i < 2; i++) {
@@ -236,7 +221,6 @@ public class Glavna {
 
 
             scanner.nextLine();
-            String ocjenaUText = null;
 
             System.out.println("Unesite datum i vrijeme ispita u formatu (dd.MM.yyyy.THH:mm): ");
             String datumIVrijemeIspita = scanner.nextLine();
@@ -269,6 +253,8 @@ public class Glavna {
 
         }
 
+
+        
         List<Ispit> ispitis = ispiti;
         logger.info("END: unosIspita()");
         logger.debug("OUTPUT: {}", ispitis.toString());
