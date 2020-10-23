@@ -4,6 +4,7 @@ package hr.java.vjezbe.glavna;
 import hr.java.vjezbe.entitet.*;
 import hr.java.vjezbe.iznimke.NemoguceOdreditiProsjekStudentaException;
 import hr.java.vjezbe.iznimke.PostojiViseNajmladjihStudenataException;
+import hr.java.vjezbe.sortiranje.StudentSorter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -225,11 +226,25 @@ public class Glavna {
             System.out.println("Unesite datum i vrijeme ispita u formatu (dd.MM.yyyy.THH:mm): ");
             String datumIVrijemeIspita = scanner.nextLine();
 
+
+
+
+
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy.'T'HH:mm", Locale.getDefault());
 
             LocalDateTime date = LocalDateTime.parse(datumIVrijemeIspita, dtf);
 
             ispiti.add(new Ispit(predmeti.get(odabirPredemta - 1), studenti.get(odabirStudenta - 1), ocjenaIspita, date));
+
+            List<Student> listaStudenta = new ArrayList<>();
+            for (int j = 0; j < ispiti.size(); j++) {
+                listaStudenta.add(ispiti.get(j).getStudent());
+            }
+            Collections.sort(listaStudenta, new StudentSorter());
+
+            for (int j = 0; j < listaStudenta.size(); j++) {
+                System.out.println(listaStudenta.get(j).getIme() + " " + listaStudenta.get(j).getPrezime() );
+            }
 
 
             Ocjena ocjena = null;

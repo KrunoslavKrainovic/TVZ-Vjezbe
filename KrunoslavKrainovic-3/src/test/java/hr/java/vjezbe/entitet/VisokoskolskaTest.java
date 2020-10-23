@@ -35,14 +35,13 @@ public class VisokoskolskaTest {
 
     private Profesor profesor = new Profesor("Prof","Prof","srot","srot");
 
-    private Predmet predmet = new Predmet("1337","Java",5,profesor);
+
     FakultetRacunarstva fax;
 
     @Before
     public void setUp(){
         ispiti = new ArrayList();
-        ispiti.add(new Ispit(5,student,predmet));
-        ispiti.add(new Ispit(5,student1,predmet));
+
 
         studenti = new ArrayList();
         studenti.add(student);
