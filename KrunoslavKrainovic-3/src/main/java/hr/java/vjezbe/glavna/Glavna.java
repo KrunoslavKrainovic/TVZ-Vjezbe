@@ -5,9 +5,11 @@ import hr.java.vjezbe.entitet.*;
 import hr.java.vjezbe.iznimke.NemoguceOdreditiProsjekStudentaException;
 import hr.java.vjezbe.iznimke.PostojiViseNajmladjihStudenataException;
 import hr.java.vjezbe.sortiranje.StudentSorter;
+import javafx.css.converter.LadderConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.naming.PartialResultException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -62,7 +64,7 @@ public class Glavna {
         Integer odabraniProfesor = 0;
         Integer brojStudenata = 0;
 
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 3; i++) {
 
             System.out.println("Unesite " + (i + 1) + ". predmet: ");
 
@@ -105,10 +107,37 @@ public class Glavna {
             } while (tocanUnos == false);
 
 
+
             scanner.nextLine();
 
             Set<Student> students = new HashSet<>();
             predmeti.add(new Predmet(sifraPredmeta, nazivPredmeta, brojEctsBodova, profesori.get(odabraniProfesor - 1),students));
+
+        }
+
+        HashMap<Profesor,List<Predmet>> predmetListHashMap = new HashMap<>();
+        List<Predmet> predmetiProfesoraZaDrugiPredemt = new ArrayList<>();
+        List<Predmet> predmetiProfesoraZaPrviPredemt = new ArrayList<>();
+
+        for (int i = 0; i < predmeti.size(); i++) {
+
+            if(predmeti.get(i).getNositelj() == profesori.get(0)){
+                predmetiProfesoraZaPrviPredemt.add(predmeti.get(i));
+            }
+            if(predmeti.get(i).getNositelj() == profesori.get(1)){
+                predmetiProfesoraZaDrugiPredemt.add(predmeti.get(i));
+            }
+
+        }
+        predmetListHashMap.put(profesori.get(0),predmetiProfesoraZaPrviPredemt);
+        predmetListHashMap.put(profesori.get(1),predmetiProfesoraZaDrugiPredemt);
+
+
+        for (Profesor i : predmetListHashMap.keySet()) {
+            System.out.println("Profesor " + i.getIme() + " " + i.getPrezime() + " predaje sljedeće predmete: ");
+            for (int j = 0; j < predmetListHashMap.get(i).size(); j++) {
+                System.out.println((j+1) + ") " + predmetListHashMap.get(i).get(j).getNaziv());
+            }
 
         }
 
@@ -227,7 +256,10 @@ public class Glavna {
             String datumIVrijemeIspita = scanner.nextLine();
 
 
-
+            //Stavi studente u Set pa stavi u predmet,ako taj predmet postoji stavi
+            Set<Student> hs = new HashSet<Student>();
+            hs.add(studenti.get(odabirStudenta - 1));
+            predmeti.get(odabirPredemta - 1).setStudenti(hs);
 
 
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy.'T'HH:mm", Locale.getDefault());
@@ -236,15 +268,7 @@ public class Glavna {
 
             ispiti.add(new Ispit(predmeti.get(odabirPredemta - 1), studenti.get(odabirStudenta - 1), ocjenaIspita, date));
 
-            List<Student> listaStudenta = new ArrayList<>();
-            for (int j = 0; j < ispiti.size(); j++) {
-                listaStudenta.add(ispiti.get(j).getStudent());
-            }
-            Collections.sort(listaStudenta, new StudentSorter());
 
-            for (int j = 0; j < listaStudenta.size(); j++) {
-                System.out.println(listaStudenta.get(j).getIme() + " " + listaStudenta.get(j).getPrezime() );
-            }
 
 
             Ocjena ocjena = null;
@@ -269,13 +293,79 @@ public class Glavna {
         }
 
 
-        
+
+        ispisPredmeta( ispiti);
+        predmetiBezStudenata(ispiti, predmeti);
+
+
+
+
+        Arrays.asList(ispiti).contains(predmeti);
         List<Ispit> ispitis = ispiti;
         logger.info("END: unosIspita()");
         logger.debug("OUTPUT: {}", ispitis.toString());
 
         return ispitis;
+
     }
+
+    public static void ispisPredmeta(List<Ispit> ispiti){
+        int counterIstihPredmeta = 0;
+        List<Student> listaStudenta = new ArrayList<>();
+        for (int i = 0; i < ispiti.size(); i++) {
+
+            for (int j = 0; j < ispiti.size(); j++) {
+
+                if (ispiti.get(i) != ispiti.get(j) && ispiti.get(i).getPredmet().getNaziv() == ispiti.get(j).getPredmet().getNaziv()){
+
+                    listaStudenta.add(ispiti.get(j).getStudent());
+
+                    if(counterIstihPredmeta == 0){
+                        System.out.println("Studenti upisani na predmet " + ispiti.get(j).getPredmet().getNaziv());
+                        counterIstihPredmeta++;
+                    }
+                    Collections.sort(listaStudenta, new StudentSorter());
+
+
+                }
+            }
+
+        }
+        for (int i = 0; i < listaStudenta.size(); i++) {
+            System.out.println(listaStudenta.get(i).getIme() + " " + listaStudenta.get(i).getPrezime());
+        }
+        for (int i = 0; i < ispiti.size(); i++) {
+            int counterUniquePredmeta = 0;
+            for (int j = 0; j < ispiti.size(); j++) {
+
+                if ( ispiti.get(i).getPredmet().getNaziv() == ispiti.get(j).getPredmet().getNaziv()){
+                    counterUniquePredmeta++;
+
+                }
+
+            }
+            if(counterUniquePredmeta == 1){
+                System.out.println("Studenti upisani na predmet " + ispiti.get(i).getPredmet().getNaziv());
+                System.out.println(ispiti.get(i).getStudent().getIme() + " " + ispiti.get(i).getStudent().getPrezime());
+            }
+        }
+
+    }
+    private static void predmetiBezStudenata(List<Ispit> ispiti, List<Predmet> predmeti) {
+        List<Predmet> neupisaniPredmeti = new ArrayList<>();
+
+        for (int i = 0; i < ispiti.size(); i++) {
+            neupisaniPredmeti.add(ispiti.get(i).getPredmet());
+        }
+
+        for (int i = 0; i < predmeti.size(); i++) {
+            if(!neupisaniPredmeti.contains(predmeti.get(i))){
+                System.out.println("Nema studenata upisanih na predmet '" + predmeti.get(i).getNaziv() + "'.");
+            }
+
+        }
+    }
+
 
     public static void unosObrazovneUstanove(Scanner scanner, List<Ispit> ispiti, List<Student> studenti, List<Predmet> predmeti, List<Profesor> profesori)
         throws NemoguceOdreditiProsjekStudentaException, PostojiViseNajmladjihStudenataException {
