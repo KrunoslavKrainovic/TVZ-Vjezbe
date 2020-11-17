@@ -5,11 +5,8 @@ import hr.java.vjezbe.entitet.*;
 import hr.java.vjezbe.iznimke.NemoguceOdreditiProsjekStudentaException;
 import hr.java.vjezbe.iznimke.PostojiViseNajmladjihStudenataException;
 import hr.java.vjezbe.sortiranje.StudentSorter;
-import javafx.css.converter.LadderConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javax.naming.PartialResultException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -51,6 +48,8 @@ public class Glavna {
         logger.info("END: unosProfesora()");
         logger.debug("OUTPUT: {}", profesoris.toString());
 
+
+
         return profesoris;
     }
 
@@ -63,57 +62,92 @@ public class Glavna {
         Integer brojEctsBodova = 0;
         Integer odabraniProfesor = 0;
         Integer brojStudenata = 0;
+        boolean unosPredmetaIProfesora = false;
+        boolean prviProfesor = false;
+        boolean drugiProfesor = false;
+        boolean viseOdJednogPredmeta = false;
+        Integer brojPredmeta = 0;
+  do {
+      for (int i = 0; i < 3; i++) {
 
-        for (int i = 0; i < 3; i++) {
+          System.out.println("Unesite " + (i + 1) + ". predmet: ");
 
-            System.out.println("Unesite " + (i + 1) + ". predmet: ");
-
-            System.out.println("Unesite šifru predmeta: ");
-            String sifraPredmeta = scanner.nextLine();
-
-
-            System.out.println("Unesite naziv predmeta: ");
-            String nazivPredmeta = scanner.nextLine();
-
-
-            do {
-                System.out.println("Unesite broj ECTS bodova za predmet '" + nazivPredmeta + "': ");
-                try {
-                    brojEctsBodova = scanner.nextInt();
-                    tocanUnos = true;
-                } catch (Exception e) {
-                    scanner.nextLine();
-                    logger.info("Upisano je slovo umjesto broja " + e.getMessage());
-                    System.out.println("Ponovite unos");
-                    tocanUnos = false;
-                }
-            } while (tocanUnos == false);
-
-            System.out.println("Odaberite profesora: ");
-
-            do {
-                for (int j = 0; j < profesori.size(); j++) {
-                    System.out.println((j + 1) + ". " + profesori.get(j).getIme() + " " + profesori.get(j).getPrezime());
-                }
-                try {
-                    odabraniProfesor = scanner.nextInt();
-                    tocanUnos = true;
-                } catch (Exception e) {
-                    scanner.nextLine();
-                    logger.info("Upisano je slovo umjesto broja ");
-                    System.out.println("Ponovite unos");
-                    tocanUnos = false;
-                }
-            } while (tocanUnos == false);
+          System.out.println("Unesite šifru predmeta: ");
+          String sifraPredmeta = scanner.nextLine();
 
 
+          System.out.println("Unesite naziv predmeta: ");
+          String nazivPredmeta = scanner.nextLine();
 
-            scanner.nextLine();
 
-            Set<Student> students = new HashSet<>();
-            predmeti.add(new Predmet(sifraPredmeta, nazivPredmeta, brojEctsBodova, profesori.get(odabraniProfesor - 1),students));
+          do {
+              System.out.println("Unesite broj ECTS bodova za predmet '" + nazivPredmeta + "': ");
+              try {
+                  brojEctsBodova = scanner.nextInt();
+                  tocanUnos = true;
+              } catch (Exception e) {
+                  scanner.nextLine();
+                  logger.info("Upisano je slovo umjesto broja " + e.getMessage());
+                  System.out.println("Ponovite unos");
+                  tocanUnos = false;
+              }
+          } while (tocanUnos == false);
 
-        }
+          System.out.println("Odaberite profesora: ");
+
+          do {
+              for (int j = 0; j < profesori.size(); j++) {
+                  System.out.println((j + 1) + ". " + profesori.get(j).getIme() + " " + profesori.get(j).getPrezime());
+              }
+              try {
+                  odabraniProfesor = scanner.nextInt();
+                  tocanUnos = true;
+              } catch (Exception e) {
+                  scanner.nextLine();
+                  logger.info("Upisano je slovo umjesto broja ");
+                  System.out.println("Ponovite unos");
+                  tocanUnos = false;
+              }
+          } while (tocanUnos == false);
+
+
+          scanner.nextLine();
+
+          Set<Student> students = new HashSet<>();
+          predmeti.add(new Predmet(sifraPredmeta, nazivPredmeta, brojEctsBodova, profesori.get(odabraniProfesor - 1), students));
+
+      }
+
+      for (int i = 0; i < predmeti.size(); i++) {
+
+          if(profesori.get(0) == predmeti.get(i).getNositelj()){
+              prviProfesor = true;
+          }
+          if(profesori.get(1) == predmeti.get(i).getNositelj()){
+              drugiProfesor = true;
+          }
+
+      }
+
+      for (int i = 0; i < profesori.size(); i++) {
+          for (int j = 0; j < predmeti.size(); j++) {
+              if (profesori.get(i) == predmeti.get(j).getNositelj()){
+                  brojPredmeta++;
+              }
+
+              if (brojPredmeta > 1) {
+                  viseOdJednogPredmeta = true;
+              }
+          }
+          brojPredmeta = 0;
+      }
+
+      if (prviProfesor && drugiProfesor && viseOdJednogPredmeta){
+          unosPredmetaIProfesora = true;
+      }
+
+  }
+  while(unosPredmetaIProfesora == false);
 
         HashMap<Profesor,List<Predmet>> predmetListHashMap = new HashMap<>();
         List<Predmet> predmetiProfesoraZaDrugiPredemt = new ArrayList<>();
@@ -165,11 +199,12 @@ public class Glavna {
             System.out.println("Unesite prezime studenta: ");
             String prezimeStudenta = scanner.nextLine();
 
-            System.out.println("Unesite datum rodenja studenta " + imeStudenta + " " + prezimeStudenta + " u formatu (dd.MM.yyyy)");
+            System.out.println("Unesite datum rodenja studenta " + imeStudenta + " " + prezimeStudenta + " u formatu (dd.MM.yyyy.)");
             String datumRodjena = scanner.nextLine();
 
             System.out.println("Unesite JMBAG studenta: " + imeStudenta + " " + prezimeStudenta + ":");
             String jmbagStudenta = scanner.nextLine();
+            //-------ODRADITI PROVJERU DA SE NE MOZE UNIJETI BILO KAKAV STRING-------------------------
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy.");
             LocalDate dateTime = LocalDate.parse(datumRodjena, formatter);
@@ -351,6 +386,7 @@ public class Glavna {
         }
 
     }
+
     private static void predmetiBezStudenata(List<Ispit> ispiti, List<Predmet> predmeti) {
         List<Predmet> neupisaniPredmeti = new ArrayList<>();
 
@@ -365,7 +401,6 @@ public class Glavna {
 
         }
     }
-
 
     public static void unosObrazovneUstanove(Scanner scanner, List<Ispit> ispiti, List<Student> studenti, List<Predmet> predmeti, List<Profesor> profesori)
         throws NemoguceOdreditiProsjekStudentaException, PostojiViseNajmladjihStudenataException {
